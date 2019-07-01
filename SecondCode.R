@@ -5,5 +5,5 @@ mean(X) #: for 1000 standard distribution: close to zero
 var(X) #: close to  one
 median(X) #: close to zero
 mean(X^4) # : close to 3
-boxplor(X)
+boxplot(X)
 summary(X)
