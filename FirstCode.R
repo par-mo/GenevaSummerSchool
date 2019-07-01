@@ -2,6 +2,5 @@
 X=rnorm(1000)
 
 #Make an histogram
-#asdnlkasj
 hist(X, col="lightgrey")
 
