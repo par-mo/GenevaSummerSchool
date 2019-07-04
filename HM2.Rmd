@@ -1,0 +1,66 @@
+---
+title: "HM2"
+author: "M. Parhizker"
+date: "7/4/2019"
+output: html_document
+---
+
+### Problem 4: Construct a portfolio
+- file:///Users/m/Downloads/stat297-master/docs/articles/homework.html
+- 4.2.4 textbook
+#### Clinet condistions: 
+- Invest exactly $1,000,000.
+- Only invest in stocks that are in the S&P500 index.
+- Spend less than $100 in execution.
+
+```{r setup, include=FALSE}
+
+library(quantmod)
+library(rvest)
+# install.packages("rvest")
+
+sp500 <- read_html("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies")
+
+sp500 %>% 
+html_nodes(".text") %>% 
+html_text() -> ticker_sp500
+
+SP500_symbol <- ticker_sp500[(1:499)*2+1]
+SP500_symbol[SP500_symbol == "BRK.B"] <- "BRK-B"
+SP500_symbol[SP500_symbol == "BF.B"] <- "BF-B"
+
+library(quantmod)
+today <- Sys.Date()
+three_year_ago <- seq(today, length = 2, by = "-3 year")[2]
+stocks_tickers <- c("AAPL", "MSFT")
+getSymbols(stocks_tickers, from = three_year_ago, to = today)
+
+nb_ticker <- length(stocks_tickers)
+var_stocks <- rep(NA, nb_ticker)
+names(var_stocks) <- stocks_tickers
+
+for (i in 1:nb_ticker){
+Xt = na.omit(ClCl(get(stocks_tickers[i])))
+stocks_tickers[i] = var(Xt)
+}
+stocks_tickers
+```
+
+
+```{r}
+
+function_max_cost <- function(x_i) {
+  output_A= max(40,0.0001*x_i)
+  return(output_A)
+}
+```
+
+
+
+
+```{r}
+function_add <- function(i,j) {
+  output_A= i+j
+  return(output_A)
+}
+```
