@@ -1,0 +1,33 @@
+---
+title: "chap5"
+output: html_document
+---
+
+```{r}
+set.seed(12)
+student_work <- c(0, 0, 0, 0, 0, 0.25, 0.75, 0.75, 1, 1.25, 6)
+n = length(student_work)
+B = 1000
+mean_bootstrap = rep(NA, B)
+
+for (i in 1:B){
+  mean_bootstrap[i] = mean(student_work[sample(1:n, replace = TRUE)])
+}
+
+quantile(mean_bootstrap, probs = c(0.025, 0.975))
+```
+
+
+
+```{r}
+a = 0
+b = 2
+B = 1000000
+inter = 0
+for (i in 1:B){
+  inter = inter + (runif(1, a, b))^2
+}
+
+(b - a)*inter/B
+8/3
+```
